@@ -3,6 +3,7 @@ package chapter.android.aweme.ss.com.homework;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 /**
  * 作业1：
@@ -12,12 +13,30 @@ import android.support.v7.app.AppCompatActivity;
  * <p>
  * Tips：思考用比Activity的生命周期要长的来存储？  （比如：application、static变量）
  */
+
 public class Exercises1 extends AppCompatActivity {
 
+    TextView logTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        TextView logTextView = findViewById(R.id.log_textview);
+        logTextView.setText(MyApplication.logString);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MyApplication.logString += "onStop\n";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyApplication.logString += "onDestroy\n";
     }
 
 }
